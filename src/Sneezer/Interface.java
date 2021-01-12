@@ -14,6 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
 
+/**
+ * This is the interface for the whole program
+ * 
+ */
 public class Interface extends Application{
 	
 	// vars 
@@ -35,6 +39,11 @@ public class Interface extends Application{
 
 	@Override
 	// Start method for application
+	/**
+	 * Start method
+	 * 
+	 * param: stage 
+	 */
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
 						
@@ -71,6 +80,12 @@ public class Interface extends Application{
 		
 	}
 	
+	/**
+	 * The method to create the enryption page
+	 * 
+	 * @return: the vbox node that will define the encryption page
+	 * 
+	 */
 	public VBox encPage() {
 		
 		go = new Button("go");
@@ -119,7 +134,13 @@ public class Interface extends Application{
 		return gp;
 		
 	}
-	
+
+	/**
+	 * The method to create the dedcryption page
+	 * 
+	 * @return: the vbox node that will define the decryption page
+	 * 
+	 */
 	public VBox decPage() {
 		
 		go2 = new Button("go");
@@ -177,6 +198,13 @@ public class Interface extends Application{
 		
 	}
 	
+
+	/**
+	 * The method to create the home page
+	 * 
+	 * @return: the vbox node that will define the home page
+	 * 
+	 */
 	public VBox homePage() {
 		
 		VBox v = new VBox();

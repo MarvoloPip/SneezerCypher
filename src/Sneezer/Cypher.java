@@ -1,6 +1,5 @@
 package Sneezer;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,19 +7,38 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+/**
+ * The class for the cipher. Also performs the necessary operations 
+ * that come with it
+ *  
+ */
 public class Cypher {
 
+	// instance vars
 	Shift shift;
 	String og;
 	String update;
 	int bf = 0;
 	
+
+	/**
+	 * Constructor method
+	 * 
+	 */
 	public Cypher(String t, Shift s) {
 		this.shift = s;
 		this.og = t;
 		this.update = "";
 	}
 		
+
+	/**
+	 * encrypt method
+	 * 
+	 * @return: the ciphered string
+	 * 
+	 */
 	public String encrypt() {
 				
 		char[] ch = this.og.toCharArray();
@@ -50,12 +68,14 @@ public class Cypher {
 	
 		this.update = newCh;
 		return newCh;
-		
 	}
 	
+
+	/**
+	 * bruteforce method
+	 * 
+	 */
 	public void bruteForce() {
-		 
-		//System.out.println("ok");
 		ArrayList<String> al = new ArrayList<String>();
 		
 		this.shift.dir = "-";
@@ -64,23 +84,37 @@ public class Cypher {
 			al.add(this.encrypt());
 		}
 		
+		String out = "";
+		
+		for (String s: al) {
+			out += s.toString();
+			out += "\n";
+		}
+		
 		try {
 		      FileWriter w = new FileWriter("guesses.txt");
-		      w.write(al.toString());
+		      w.write(out);
 		      w.close();
 		    }
 		catch (IOException e) {
 		      e.printStackTrace();
 		    }		
 	}
-		
+	
+	/**
+	 * adjust the value if its not between 32 and 126
+	 * to loop around 
+	 * 
+	 * @param: the old value
+	 * @return: the adjusted value
+	 * 
+	 */
 	public static int adjust(int num) {
 		
 		if (num > 126) {
 			return (num-126)+32; 
 		}
 		else if (num < 32) {
-			//System.out.println("MAth " + (126-(int)Math.abs(32-num)));
 			return 126 -(32-num);
 		}
 		else return num;
@@ -89,33 +123,5 @@ public class Cypher {
 	public void bfRange(int n) {
 		this.bf = n;
 	}
-	
-	public static void main(String[] args) {
-		
-		int key = 234;
-		
-		Cypher test = new Cypher("geg", new Shift(key, "+"));
-		
-		String bruh = test.encrypt();
-		
-		System.out.println(bruh);
-		
-		Cypher test2 = new Cypher(bruh, new Shift(key, "-"));
-		
-		System.out.println(test2.encrypt());
-
-//		ArrayList<String> l = test2.bruteForce();
-//		for (String s: l) {
-//			System.out.println(s);
-//		}
-		
-//		Pattern keyPattern = Pattern.compile("[+-]{1}\\d+");
-//		Matcher m = keyPattern.matcher("+20");
-//		System.out.println(m.matches());
-//		
-		//System.out.println(Integer.parseInt("20"));
-		
 			
-	}
-		
 }
