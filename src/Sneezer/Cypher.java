@@ -1,6 +1,9 @@
 package Sneezer;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,23 +53,27 @@ public class Cypher {
 		
 	}
 	
-	public ArrayList<String> bruteForce(int v) {
-		
-		
+	public void bruteForce() {
+		 
+		//System.out.println("ok");
 		ArrayList<String> al = new ArrayList<String>();
 		
-		this.shift.dir = "+";
-		for (int i = 0; i < v; i++) {
+		this.shift.dir = "-";
+		for (int i = 0; i <= this.bf; i++) {
 			this.shift.value = i;
 			al.add(this.encrypt());
 		}
-				
-		return al;
 		
+		try {
+		      FileWriter w = new FileWriter("guesses.txt");
+		      w.write(al.toString());
+		      w.close();
+		    }
+		catch (IOException e) {
+		      e.printStackTrace();
+		    }		
 	}
-	
-	// fucked
-	
+		
 	public static int adjust(int num) {
 		
 		if (num > 126) {
@@ -87,7 +94,7 @@ public class Cypher {
 		
 		int key = 234;
 		
-		Cypher test = new Cypher("niger", new Shift(key, "+"));
+		Cypher test = new Cypher("geg", new Shift(key, "+"));
 		
 		String bruh = test.encrypt();
 		
@@ -106,13 +113,9 @@ public class Cypher {
 //		Matcher m = keyPattern.matcher("+20");
 //		System.out.println(m.matches());
 //		
-//		System.out.println("20");
+		//System.out.println(Integer.parseInt("20"));
 		
-		
-
-		
+			
 	}
-	
-	
-	
+		
 }

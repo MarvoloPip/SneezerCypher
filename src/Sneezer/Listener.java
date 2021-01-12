@@ -16,7 +16,7 @@ public class Listener implements EventHandler<ActionEvent> {
 		// TODO Auto-generated method stub
 
 		// key regex
-		Pattern keyPattern = Pattern.compile("\\d+");
+		Pattern keyPattern = Pattern.compile("\\d+\\s*");
 
 		HashMap<Button, Node> hmap = new HashMap();
 		// set up the buttons to their corresponding pagess
@@ -38,6 +38,7 @@ public class Listener implements EventHandler<ActionEvent> {
 		else if (evn == Interface.go) {
 
 			String k = Interface.key.getText();
+			k.replaceAll(" ", "");
 			
 			if (keyPattern.matcher(k).matches()) {
 								
@@ -49,7 +50,9 @@ public class Listener implements EventHandler<ActionEvent> {
 		}
 		else if (evn == Interface.go2) {
 
-			String k = Interface.key2.getText();			
+			String k = Interface.key2.getText();	
+			k.replaceAll(" ", "");
+
 			if (keyPattern.matcher(k).matches()) {
 				 				
 				Cypher text = new Cypher(Interface.input2.getText(), 
@@ -57,6 +60,22 @@ public class Listener implements EventHandler<ActionEvent> {
 				
 				Interface.output2.setText(text.encrypt());
 			}
+			
+		}
+		else if (evn == Interface.bf) {
+			
+			String r = Interface.bfb.getText();
+			r.replaceAll(" ","");
+			if (keyPattern.matcher(r).matches()) {
+				Cypher text = new Cypher(Interface.input2.getText(), 
+						new Shift(-1, "-"));
+				
+				text.bfRange(Integer.parseInt(r));
+				text.bruteForce();
+				
+			}
+
+			
 			
 		}
 

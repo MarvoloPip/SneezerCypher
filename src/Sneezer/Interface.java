@@ -1,5 +1,8 @@
 package Sneezer;
 
+import java.io.File;
+import java.io.IOException;
+
 // imports
 import javafx.application.Application;  
 import javafx.geometry.Insets;
@@ -18,8 +21,8 @@ public class Interface extends Application{
 	protected static Button home, enc, dec, bf, go, go2;
 	protected static Scene mainScene;
 	protected static TextField input, output,input2, output2, key, key2, bfb; 
-	protected static VBox encBox, decBox, left;
-	protected static Label instrL;
+	protected static VBox encBox, decBox, left, instrL;
+	//protected static Label instrL;
 	
 	// global listener
 	Listener lol = new Listener();
@@ -123,6 +126,7 @@ public class Interface extends Application{
 		go2.setOnAction(lol);
 		
 		bf = new Button("BRUTEFORCE");
+		bf.setOnAction(lol);
 		
 		HBox h1 = new HBox();
 		h1.setSpacing(10);
@@ -173,10 +177,12 @@ public class Interface extends Application{
 		
 	}
 	
-	public Label homePage() {
+	public VBox homePage() {
 		
+		VBox v = new VBox();
+		v.setPadding(new Insets(80));
+				
 		Label inst = new Label();
-		inst.setPadding(new Insets(100));
 		inst.setText("Welcome to the SneezerCypher! \n" + 
 				"\n" + 
 				"This is a variation of the Caesar Cipher using ASCII where you will be able to shift characters\n"
@@ -201,7 +207,9 @@ public class Interface extends Application{
 				"Have fun! \n" + 
 				"");
 		
-		return inst;
+		v.getChildren().add(inst);
+		
+		return v;
 	}
 
 }
